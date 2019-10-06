@@ -19,4 +19,5 @@ public class User extends Model<User> {
     private Date createTime;
     @TableField(exist = false)
     private String remark;
+
 }
