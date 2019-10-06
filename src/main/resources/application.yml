@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+    url: jdbc:mysql://127.0.0.1:3306/guigu?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  #全局配置 id类型
+  global-config:
+    db-config:
+      id-type: auto
+      #s设置空字段是否设置到set后面一般不用
+      #field-strategy: ignored
+      #设置实体类映射表名的统一前缀名
+      #table-prefix: tb_
+  #基础配置
+
+  #1,加载mp的配置文件config-location: 与 configuration 不能同时出现
+  #config-location: classpath:mybatis-config.xml
+  type-aliases-package: com.puxin.mp.entity
+  #驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+    #db策略
+
+
+
+
