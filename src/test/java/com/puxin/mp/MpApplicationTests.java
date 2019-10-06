@@ -611,6 +611,7 @@ public class MpApplicationTests {
     @Test
     public void testService(){
         //userserviceImpl.getOne()
+        //接口的实现类需要继承继承 ServiceImpl 然后实现 自己定义的接口
     }
 
 }
