@@ -27,12 +27,38 @@ public class MpMyTestAdvance {
 
     /*
     查询的sql语句会自动过滤掉状态是已删除的数据 更新同理
+    但是自定义的sql语句不会自动在where后面增加任何条件
      */
     @Test
     public void test_02(){
         List<User> list = userMapper.selectList(null);
         list.forEach(System.out::println);
     }
+    /*
+    自动填充测试
+     */
+
+    @Test
+    public void test_insert03(){
+        User user = new User();
+        user.setEmail("3");
+        user.setRealName("汪汪汪");
+        user.setRemark("小狗");
+        user.setAge(3);
+        boolean insert = user.insert();
+        System.out.println("-------->>"+insert);
+        //int insert1 = userMapper.insert(user);
+        //System.out.println("---------------"+insert1);
+    }
+    @Test
+    public void test_update03(){
+        User user = new User();
+        user.setUserId(1180407105012961287L);
+        user.setAge(33);
+        int row = userMapper.updateById(user);
+        System.out.println("---------------"+row);
+    }
+
 
 
 }
