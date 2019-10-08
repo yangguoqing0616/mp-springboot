@@ -59,6 +59,16 @@ public class MpMyTestAdvance {
         System.out.println("---------------"+row);
     }
 
+    @Test
+    public void test_insert04(){
+        User user = new User();
+        user.setEmail("32");
+        user.setRealName("汪2汪");
+        user.setRemark("小狗");
+        user.setAge(32);
+        int insert1 = userMapper.insert(user);
+        System.out.println("---------------"+insert1);
+    }
 
 
 }
