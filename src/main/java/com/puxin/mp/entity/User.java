@@ -19,5 +19,8 @@ public class User extends Model<User> {
     private Date createTime;
     @TableField(exist = false)
     private String remark;
+    @TableLogic // 进阶 这里面可以局部设置删除的状态,一般不用设置
+    @TableField(select = false)//用来设置该字段不会再查询中出现
+    private Integer deleteStatus;
 
 }

@@ -16,6 +16,11 @@ mybatis-plus:
       #field-strategy: ignored
       #设置实体类映射表名的统一前缀名
       #table-prefix: tb_
+
+      # 进阶 全局配置 逻辑删除 0 未删除
+      logic-not-delete-value: 0
+      # 进阶 全局配置 逻辑删除 1 已删除
+      logic-delete-value: 1
   #基础配置
 
   #1,加载mp的配置文件config-location: 与 configuration 不能同时出现
