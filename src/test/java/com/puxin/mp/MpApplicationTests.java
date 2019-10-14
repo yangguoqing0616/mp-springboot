@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.additional.update.impl.LambdaU
 import com.puxin.mp.dao.UserMapper;
 import com.puxin.mp.entity.User;
 import com.puxin.mp.service.impl.UserServiceImpl;
+import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,7 +72,7 @@ public class MpApplicationTests {
         //普通插入
         User user = new User();
         user.setRealName("小李");
-        user.setCreateTime(new Date());
+        user.setCreateTime(LocalDateTime.now());
         user.setAge(16);
         user.setManagerId(1088248166370832385L);
         user.setRemark("我是一个标记不是表字段");
@@ -589,7 +590,6 @@ public class MpApplicationTests {
         user.setRemark("假的吗");
         user.setManagerId(1088248166370832385L);
         user.setEmail("1414");
-        user.setCreateTime(LocalDateTime.now());
         boolean insert = user.insert();
         System.out.println(insert);
 

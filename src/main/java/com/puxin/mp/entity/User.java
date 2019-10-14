@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -37,6 +38,6 @@ public class User extends Model<User> {
     private Date updateTime;
     //插入时直接插入时间 需要写配置类进行配置 需要写一个类实现MetaObjectHandler
     @TableField(fill = FieldFill.INSERT)
-    private Object createTime;
+    private LocalDateTime createTime;
 
 }
