@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -19,10 +20,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
         //如果当前插入的对象包含改字段就进行插入 如果不包含就不插入
         boolean createTime = metaObject.hasSetter("createTime");
+        Object createTime1 = getFieldValByName("createTime", metaObject);
         //一个参数是实体类的属性名
-        if (createTime) {
+        if (createTime && createTime1 == null) {
             System.out.println("------insert方法");
-            setInsertFieldValByName("createTime", new Date(), metaObject);
+            LocalDateTime now = LocalDateTime.now();
+            setInsertFieldValByName("createTime", now, metaObject);
         }
 
     }

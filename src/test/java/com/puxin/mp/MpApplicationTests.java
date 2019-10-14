@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -36,6 +37,7 @@ public class MpApplicationTests {
      * 注解讲解
      * @TableName();
      * 作用: 如果表名与entity或者beans 名不一致 则需要用改注解进行标识
+     * vo 与dto 表示参数承载类
      *
      * @TableId()
      * 用来设置数据库表自增属性有5个枚举类型的类型, , , 一般都是自增的0
@@ -127,7 +129,7 @@ public class MpApplicationTests {
     @Test
     public void test5() {
         QueryWrapper<User> query = Wrappers.query();
-        //query.apply("date_format(create_time,'%Y-%m-%d') = {0}", "2019-02-14").inSql("manager_id", "select user_id from tb_user where real_name like concat('王','%')");
+        query.apply("date_format(create_time,'%Y-%m-%d') = {0}", "2019-02-14").inSql("manager_id", "select user_id from tb_user where real_name like concat('王','%')");
         List<User> users = userMapper.selectList(query);
         for (User user : users) {
             System.out.println(user);
@@ -144,7 +146,7 @@ public class MpApplicationTests {
     public void test6() {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
 
-        //wrapper.likeRight("real_name", "王").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
+        wrapper.likeRight("real_name", "王").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
         List<User> users = userMapper.selectList(wrapper);
         for (User user : users) {
             System.out.println(user);
@@ -241,7 +243,6 @@ public class MpApplicationTests {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
 
         wrapper.select(User.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id")).like("real_name", "雨").lt("age", 40);
-
         List<User> users = userMapper.selectList(wrapper);
         for (User user : users) {
             System.out.println(user);
@@ -251,7 +252,7 @@ public class MpApplicationTests {
 
     /**
      * 创建条件构造器时传入实体提对象
-     * 就是在床架QueryWrapper()对象是传入相应的实体,,这样直接把传入得实体的值
+     * 就是在创建QueryWrapper()对象是传入相应的实体,,这样直接把传入得实体的值
      * 当成where条件里面等值条件,
      * 例如: 实体设置了name属性值where 条件后是ranl_name = "XXX"
      * 如果需要模糊查询则需要用标签@TableField(condition = SqlCondition.LIKE)
@@ -499,7 +500,8 @@ public class MpApplicationTests {
         // user 里面的参数会放到set后面,,update里面的参数会放到where后面
         int update1 = userMapper.update(user, update);
 
-        //可以在创建wrapper里面直接放置实体 这样实体的内容会直接出现在where后面
+        //可以在创建wrapper里面直接放置实体
+        // 这样实体的内容会直接出现在where后面默认都是""等于的条件
         UpdateWrapper<Object> objectUpdateWrapper = new UpdateWrapper<>(user);
 
     }
@@ -582,23 +584,24 @@ public class MpApplicationTests {
     @Test
     public void testAR(){
         User user = new User();
-        user.setRealName("王五");
+        user.setRealName("王五吗");
         user.setAge(12);
-        user.setRemark("假的");
+        user.setRemark("假的吗");
         user.setManagerId(1088248166370832385L);
         user.setEmail("1414");
+        user.setCreateTime(LocalDateTime.now());
         boolean insert = user.insert();
         System.out.println(insert);
 
         // 删除 方法 这个id是对象里面的id
-        user.deleteById();
+        //user.deleteById();
         // 插入或更新,,会根据id进行查询,,如果存在就是更新,如果不存在就是更新
-        user.insertOrUpdate();
+        //user.insertOrUpdate();
     }
 
     //主键策略 如果全局策略不改变就是雪花算法
     /**
-     * 主键定义在一个枚举类(IdType)里面就是共定义了6中类型
+     * 主键定义在一个枚举类(IdType)里面就是共定义了5中类型
      * 全局配置id类型 注:局部配置高于全局配置
      */
 
@@ -610,7 +613,7 @@ public class MpApplicationTests {
 
     @Test
     public void testService(){
-        //userserviceImpl.getOne()
+        userserviceImpl.list();
         //接口的实现类需要继承继承 ServiceImpl 然后实现 自己定义的接口
     }
 
