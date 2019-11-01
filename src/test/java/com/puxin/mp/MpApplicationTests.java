@@ -300,13 +300,13 @@ public class MpApplicationTests {
 
         HashMap<String, Object> param = new HashMap<>();
 
-        param.put("name", "王天风");
-        param.put("age", 25);
+        param.put("real_name", "王天风03");
+        param.put("age", 299);
         //以上是等值查询
         param.put("email", null);//如果是空,在生成的sql语句中是is null
 
-        wrapper.allEq(param, true);//如果是true是则null为is null ,false 时忽略null
-        wrapper.allEq((k, v) -> k.equals("name"), param, true); // 过滤函数,是否允许字段传入比对条件中,也可以通过v进行过滤
+        wrapper.allEq(param, false);//如果是true是则null为is null ,false 时忽略null
+        //wrapper.allEq((k, v) -> k.equals("real_name"), param, true); // 过滤函数,是否允许字段传入比对条件中,也可以通过v进行过滤
 
         List<User> users = userMapper.selectList(wrapper);
         for (User user : users) {
@@ -421,7 +421,7 @@ public class MpApplicationTests {
 
         wrapper.gt(User::getAge, 20);
 
-        Page<User> page = new Page<>(3, 2);
+        Page<User> page = new Page<>(1, 2);
 
         IPage<User> userIPage = userMapper.selectPage(page, wrapper);
         List<User> records = userIPage.getRecords();

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -45,6 +46,7 @@ public class MpMyTestAdvance {
         user.setRealName("汪汪汪");
         user.setRemark("小狗");
         user.setAge(3);
+        user.setCreateTime(LocalDateTime.now());
         boolean insert = user.insert();
         System.out.println("-------->>"+insert);
         //int insert1 = userMapper.insert(user);
