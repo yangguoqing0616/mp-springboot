@@ -22,6 +22,7 @@ public class MpMyTestAdvance {
 
     @Test
     public void test_01(){
+        //是通过配置完成逻辑删除的
         int rows = userMapper.deleteById(1180407105012961282L);
         System.out.println("------------>>>>>"+rows);
     }
