@@ -1,4 +1,4 @@
-package com.puxin.mp;
+package com.puxin;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

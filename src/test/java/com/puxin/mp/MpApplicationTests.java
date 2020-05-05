@@ -12,7 +12,6 @@ import com.baomidou.mybatisplus.extension.service.additional.update.impl.LambdaU
 import com.puxin.mp.dao.UserMapper;
 import com.puxin.mp.entity.User;
 import com.puxin.mp.service.impl.UserServiceImpl;
-import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
